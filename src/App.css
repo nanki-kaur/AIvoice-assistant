@@ -151,25 +151,21 @@ button:hover {
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
 }
 
-/* Feedback Buttons */
-.feedback {
+/* Call/Customer Service Button */
+.customer-service-button {
+  background-color: #ff5722;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 500;
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
 }
 
-.feedback button {
-  background-color: transparent;
-  border: 1px solid #e0e0e0;
-  color: #555;
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.feedback button:hover {
-  background-color: #007bff;
-  color: white;
+.customer-service-button:hover {
+  background-color: #e64a19;
 }
 
 /* Loading Indicator */
