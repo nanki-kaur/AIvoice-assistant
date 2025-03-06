@@ -69,8 +69,11 @@ const VoiceAssistant = () => {
 
   // Handle customer service button click
   const handleCustomerService = () => {
-    alert('Redirecting to customer service...');
-    // Add logic to initiate a call or redirect to a customer service page
+    // Add a message to the conversation window
+    setMessages((prev) => [
+      ...prev,
+      { sender: 'Assistant', text: 'Calling...' },
+    ]);
   };
 
   return (
