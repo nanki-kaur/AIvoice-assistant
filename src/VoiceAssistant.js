@@ -25,6 +25,19 @@ const VoiceAssistant = () => {
   const [isListening, setIsListening] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Function to convert text to speech
+  const speak = (text) => {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = speechSynthesis.getVoices().find((voice) => voice.lang === 'en-US'); // Set voice
+      utterance.rate = 1; // Speed of speech (0.1 to 10)
+      utterance.pitch = 1; // Pitch of speech (0 to 2)
+      speechSynthesis.speak(utterance);
+    } else {
+      console.error('Text-to-speech not supported in this browser.');
+    }
+  };
+
   // Handle text input submission
   const handleSend = () => {
     if (inputText.trim()) {
@@ -34,11 +47,15 @@ const VoiceAssistant = () => {
 
       // Simulate assistant response
       setTimeout(() => {
+        const response = `This is a response to: "${inputText}"`;
         setMessages((prev) => [
           ...prev,
-          { sender: 'Assistant', text: `This is a response to: "${inputText}"` },
+          { sender: 'Assistant', text: response },
         ]);
         setIsLoading(false);
+
+        // Convert assistant's response to speech
+        speak(response);
       }, 1000);
     }
   };
@@ -56,11 +73,15 @@ const VoiceAssistant = () => {
 
         // Simulate assistant response
         setTimeout(() => {
+          const response = `This is a response to: "${transcript}"`;
           setMessages((prev) => [
             ...prev,
-            { sender: 'Assistant', text: `This is a response to: "${transcript}"` },
+            { sender: 'Assistant', text: response },
           ]);
           setIsLoading(false);
+
+          // Convert assistant's response to speech
+          speak(response);
         }, 1000);
       };
       recognition.start();
@@ -74,6 +95,9 @@ const VoiceAssistant = () => {
       ...prev,
       { sender: 'Assistant', text: 'Calling...' },
     ]);
+
+    // Convert "Calling..." to speech
+    speak('Calling...');
   };
 
   return (
